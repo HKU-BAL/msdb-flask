@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<section class="content-header">
+        <h1>Browse</h1>
+        <ol class="breadcrumb">
+                <li><a href={{url_for("main.index")}}><i class="fas fa-home"></i> Home</a></li>
+                <li class="active">Browse</li>
+        </ol>
+</section>
+<section class="content">
+<table>
+{% set total_num=speciesInfo["species"]|length %}
+	{% for index in range(0,total_num,6)%}
+		{% set line_num = index+6 %}
+		{% if line_num > total_num %}
+		{% set line_num = total_num %}
+		{% endif %}
+		
+		<tr>
+		{% for j in range(index,line_num) %}
+			
+			<td class="col-xs-1">
+				
+				<div class="box box-success">
+				<div class="box-body">
+					
+                                        <a href={{url_for("main.mitronSearchResult",keywords="None",species=speciesInfo["species"][j],organisms="all",sources="all")}}>
+                                        <h4 align="center"><strong>{{speciesInfo["species"][j]}}</strong></h4></a>
+                                       
+                                
+					<div class="box box-default">
+						<div class="box-body">
+							<div class="row" align="center">Precursor: <strong>{{speciesInfo["precursor"][j]}}</strong></div>
+							<div class="row" align="center">Mature: <strong>{{speciesInfo["mature"][j]}}</strong></div>
+						<div>
+					</div>
+				</div>
+				</div>
+				
+			</td>
+
+
+		{% endfor %}
+		</tr>
+	{% endfor %}
+
+</table>
+</section>
+{% endblock %}

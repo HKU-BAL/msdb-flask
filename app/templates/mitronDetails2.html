@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<section class="content-header">
+        <h1>{{curMitronInfo['Mirtron name']}}</h1>
+        <ol class="breadcrumb">
+                <li><a href={{url_for("main.index")}}><i class="fas fa-home"></i> Home</a></li>
+                <li class="active">Mirtron details</li>
+        </ol>
+</section>
+
+<section class="content">
+	<div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+        <div class="box box-success">
+
+        	<div class="box-header">
+                	
+        	</div>
+        	<div class="box-body">
+			<table class='table'>
+			<tbody>
+                               {% for key in curMitronInfo %}
+
+					{% if(key not in ["Paper ID","Mature 5 mirtron name","Mature 3 mirtron name"]) %}
+					<tr>
+						<td>
+							<b>{{key}}</b>
+						</td>
+						<td style="word-break: break-all">
+
+							{% if(curMitronInfo[key]!=None) %}
+								{% if(key=="Paper" and curMitronInfo["Paper ID"]!=None) %}
+									<a href={{curMitronInfo["Paper ID"]}}>{{curMitronInfo[key]}}</a>
+                                                                {% elif(key=="Mature 3\'") %}
+									<span style="color:green">
+                                                                                {% if(curMitronInfo["Mature 3\'"]!="-") %}
+										<a href={{url_for("main.mirtronDetails",mitronName=curMitronInfo["Mature 3\'"])}}>{{curMitronInfo["Mature 3\'"]}}</a>
+										{% else %}{{curMitronInfo["Mature 3\'"]}}
+										{% endif %}
+									</span>
+                                                                {% elif(key=="Mature 5\'") %}
+                                                                        <span style="color:green">
+										{% if(curMitronInfo["Mature 5\'"]!="-") %}
+											<a href={{url_for("main.mirtronDetails",mitronName=curMitronInfo["Mature 5\'"])}}>{{curMitronInfo["Mature 5\'"]}}</a>
+										{% else %} {{curMitronInfo["Mature 5\'"]}}
+										{% endif %}
+									</span> 
+
+								{% else %}
+									{{curMitronInfo[key]}}
+								{% endif %}
+							{% endif %}
+						</td>
+					</tr>
+					{% endif %}
+				{% endfor %}
+				{% for paper_index in range(curPaperInfo | length) %}
+					{% set paperItem = curPaperInfo[paper_index] %}
+					<tr>
+						{% if(paper_index==0) %}
+							<td><b>Paper</b></td>
+						{% else %}
+							
+							<td><b>Paper({{paper_index+1}})</b></td>
+						{% endif %}
+						{% if(paperItem.paperName!=None) %}
+						{% set cur_link="https://dx.doi.org/"+paperItem.paperID %}
+						<td style="word-break: break-all"><a href={{cur_link}}>{{paperItem.paperName}}</a></td>
+						{% else %}
+						<td>-</td>
+						{% endif %}
+					</tr>
+				{% endfor %}
+			</tbody>
+		
+		</table>
+		</div>
+	</div>
+		<div class='row'>
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+				<form action={{url_for('main.download_select',species='all',balID=curMitronInfo["BalID"])}} method="post" id="form_download_select" novalidate>
+					<button type="submit" class="btn btn-block btn-outline-success">Download</button>
+				</form>
+			</div>	
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+		<div class="box box-success">
+			<div class="box-header">
+				
+                	</div>
+			<div class="box=body">
+				<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+					{% for img_index in range(num_img) %}
+						{% if(img_index == 0) %}
+							 <li data-target="#carouselExampleIndicators" data-slide-to={{img_index}} class="active"></li>
+						{% else %}
+							<li data-target="#carouselExampleIndicators" data-slide-to={{img_index}}></li>
+						{% endif %}
+					{% endfor %}
+					</ol>
+					<div class="carousel-inner">
+						
+						{% for cur_img_type,curImg in curImgDict.iteritems() %}
+							
+						
+							{% if(loop.index==1) %}
+								<div class="item active">
+									
+							{% else %}
+								<div class="item">
+							{% endif %}
+								<a href={{url_for("main.download_high_res",mirtronName=curMitronInfo["Mirtron name"],imgType=cur_img_type)}} method="post" id="form_download_select" novalidate />
+								<img  src="data:;base64,{{ curImg }}"  style="width:95%" alt="{{curMitronInfo['Mirtron name']}}_{{cur_img_type}}" title="Click for high resolution" />
+								</a>
+								<div>
+
+									<h5 style="text-align:center">{{cur_img_type}}</h5>
+								</div>
+						
+								
+							</div>
+							
+							
+								
+						{% endfor %}
+						
+					</div>
+						<a class="left carousel-control" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    							
+							<span class="icon-prev" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+							
+						</a>
+						<a class="right carousel-control" href="#carouselExampleIndicators" role="button" data-slide="next">
+							<span class="icon-next" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</div>
+</section>
+{% endblock %}

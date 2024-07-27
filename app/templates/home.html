@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+
+
+<div class='row'>
+<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+	<div class="box box-success" id="mitronDB-HKU-intro">
+		<div class="box-header">
+            		<h3 class="box-title"><i class="fas fa-volume-up"></i>  What is MirtronStructDB?</h3>
+            		
+          	</div>
+		<div class="box-body">
+			<p>Mirtrons, a major category of non-canonical micro RNAs (miRNAs), originate from exon-intron boundaries through splicing mechanisms. They are Drosha-independent or Dicer-independent miRNAs. Mirtrons are not limited to animals; they're also found in viruses and plants.</p>
+			<p>Welcome to <b>MirtronStructDB</b>, where we've curated over 350 novel mirtrons along with structural images, expanding upon existing databases. Explore our database to access valuable information and download what you need.</p>
+
+			<p>Start your mirtron journey now and discover the diverse world of these unique miRNAs!</p>
+		</div>
+	</div>
+
+
+
+	<div class="box box-success" id="citation">
+		<div class="box-header">
+                        <h3 class="box-title"><i class="fas fa-user-edit"></i>  How to cite</h3>
+
+                </div>
+		<div class="box-body">
+			<p>Manuscript will be available on bioRxiv soon</p>
+		</div>
+	</div>
+
+</div>
+
+<div class="col-md-6 col-lg-6 col-xs-12">
+<div class="box box-default" id="statistics image">
+	<div class="box-header">
+                        
+        </div>
+	<div class='box-body'>
+		<div class="col-lg-6 col-xs-6">
+			<div class="small-box bg-aqua">
+				<div class="inner">
+                  			<h3>{{stat_dict["precursor"] }}</h3>
+
+                  				<p>Precusors</p>
+                		</div>
+				<div class="icon">
+                  			<i class="fas fa-database"></i>
+                		</div>
+			</div>
+		</div>
+
+		<div class="col-lg-6 col-xs-6">
+              		<!-- small box -->
+              		<div class="small-box bg-red">
+                		<div class="inner">
+                  			<h3>{{stat_dict["species"]}}</h3>
+
+                  			<p>Species</p>
+                		</div>
+               			 <div class="icon">
+                  			<i class="fas fa-otter"></i>
+                		</div>
+              		</div>
+
+		</div>
+
+		<div class="col-lg-6 col-xs-6">
+              		<!-- small box -->
+              		<div class="small-box bg-green">
+                		<div class="inner">
+                  			<h3>{{stat_dict["mature"]}}</h3>
+
+                  			<p>Matures</p>
+                		</div>
+                		<div class="icon">
+                  			<i class="fas fa-feather"></i>
+                		</div>
+              		</div>
+            	</div>
+
+		<div class="col-lg-6 col-xs-6">
+              		<!-- small box -->
+              		<div class="small-box bg-yellow">
+                		<div class="inner">
+                  			<h3>{{ stat_dict["papers"] }}</h3>
+
+                  			<p>Papers</p>
+                		</div>
+                	<div class="icon">
+                  		<i class="fas fa-paperclip"></i>
+                	</div>
+              </div>
+           
+
+            </div>
+	</div>
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+{% endblock %}

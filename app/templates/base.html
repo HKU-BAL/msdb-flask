@@ -1,0 +1,98 @@
+
+{% extends 'bootstrap/base.html' %}
+{% block title %}
+    {% if title %}{{ title }} - MirtronStructDB{% else %}Welcome to MirtronStructDB{% endif %}
+{% endblock %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='AdminLTE_modify.min.css') }}">	
+	<link rel="stylesheet" href="{{ url_for('static', filename='custom3.css') }}">
+	<script src="https://kit.fontawesome.com/69a46c1458.js" crossorigin="anonymous"></script>
+		
+        {{super()}}
+
+       
+
+{% endblock %}
+{% block navbar %}
+    <nav class="navbar navbar-custom">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href={{url_for("main.index")}} >MirtronStructDB</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-custom navbar-nav">
+                    <li><a href={{url_for("main.index")}}><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href={{url_for("main.searchMain")}}> <i class="fas fa-search"></i> Search</a></li>
+		    <li><a href={{url_for("main.browser_main")}}><i class="fas fa-book-open"></i> Browse</a></li>
+		    <li><a href={{url_for("main.download_main")}}><i class="fas fa-download"></i> Download</a></li>
+	            <li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-comment"></i> About<span class="caret"></span></a>
+			<ul class="dropdown-menu" aria-labelledby="about-us">
+			<li><a href={{url_for("main.tutorial")}}><i class="fas fa-chalkboard"></i> Tutorial</a></li>
+			
+			<li><a href={{url_for("main.contact")}}><i class="fas fa-envelope"></i> Contact Us</a></li>
+			</ul>
+		    </li> 
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+{% block content %}
+        <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+	{% endwith %}
+	</div>
+
+        <div class="container">	
+        {% block app_content %}
+           
+        {# application content needs to be provided in the app_content block #}
+        
+        {% endblock %}     
+        </div>	
+	
+   	
+
+        {% block footer %}
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <footer class="page-footer font-small grey darken-4 pt-4 fixed-bottom">
+			<div class="container">
+                        <div class="row" style="color: #818588;">
+                                
+                                <div class="col">
+                                        The Department of Computer Science, HKU
+                                </div>
+                        </div>
+			</div>
+                </footer>
+	{% endblock %}
+	
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+    {{ moment.lang(g.locale) }}
+
+
+{% endblock %}
+
+
+

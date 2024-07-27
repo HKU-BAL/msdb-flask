@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block app_content %}
+
+
+
+<section class="content-header">
+        <h1>Contact Us</h1>
+        <ol class="breadcrumb">
+                <li><a href={{url_for("main.index")}}><i class="fas fa-home"></i> Home</a></li>
+                <li class="active">Contact Us</li>
+        </ol>
+</section>
+
+<section class="content">
+
+<div class="box box-success">
+<div class="box-head">
+
+</div>
+<div class="box-body">
+<form method="POST" action={{url_for("main.contact")}} id="form_contact" >
+	{{ form.hidden_tag() }}
+	
+
+	
+	<div  class='col-md-6 col-lg-6 col-xs-6'>
+	
+	<div class="form-group">
+	<label for="name">Name</label>
+	
+	
+	{{form.name(class="form-control",placeholder="Enter your name")}}
+	</div>
+	
+	<div class="form-group">
+	<label for="email">E-mail</label>
+
+	{{ form.email(class="form-control", placeholder="Enter your E-mail")}}
+	{% for error in form.email.errors %}
+        <div class="error">{{ error }}</div>
+    	{% endfor %}
+	</div>
+
+	<div class="form-group">
+        <label for="Question">Message</label>
+        {{ form.question(class="form-control form-control-lg",placeholder="Max character:1000") }}
+        </div>
+
+
+	<div class="form-group">
+	
+        {{ form.submit(class="btn btn-success")}}
+
+	</div>
+
+	</div>
+
+</form>
+
+</div>
+</div>
+
+
+
+</section>
+
+
+
+{% endblock %}

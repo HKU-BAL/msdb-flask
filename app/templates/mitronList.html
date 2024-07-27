@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<section class="content-header">
+        <h1>Search results</h1>
+        <ol class="breadcrumb">
+                <li><a href={{url_for("main.index")}}><i class="fas fa-home"></i> Home</a></li>
+                <li class="active">Search results</li>
+        </ol>
+</section>
+
+<section class="content">
+<div class="box box-success">
+<div class="box-header">
+<p class="text-left mt-3">
+   <b>{{mitronTotalNum}}</b> records were found
+</p>
+</div>
+
+
+<div class="box-body">
+
+{% set header=["BalID","Name","Species","Type","Host"] %}
+<table class='table' >
+	<thead>
+		<tr>
+			{% for cur_colName in header %}
+				<td><b>{{cur_colName}}</b></td>
+			{% endfor %}	
+		</tr>	
+	</thead>
+	{% set display_cols=["BalID","mirtronName","species","mirtronType","host_gene"] %}
+        {% for row in curMitronList.items %}
+		<tr>
+			{% for colName in display_cols%}
+				{% if(colName=="mirtronName") %}
+					<td><a href={{url_for("main.mirtronDetails",mitronName=row.__getitem__(colName))}}>{{row.__getitem__(colName)}}</a></td>
+				{% else %}
+					<td>{{ row.__getitem__(colName) }}</td>
+				{% endif %}
+			{% endfor %}
+		</tr>
+	{% endfor %}
+	<tr>
+	</tr>
+</table>
+
+
+<!-- Pagination Links-->
+<div class="text-right">
+	<a href="{{ url_for('main.mitronSearchResult', keywords=keywords,species=species,organisms=organisms,sources=sources,page=curMitronList.prev_num,mitronGroup=mitronGroup) }}" class="btn btn-outline-dark {% if curMitronList.page == 1 %}disabled{% endif %}">
+        &laquo;</a>
+	<!-- Loop through the number of pages to display a link for each-->
+	{% for page_num in curMitronList.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+		{% if page_num %}
+		<!-- Check for the active page and set the link to "Active"-->
+        	{% if curMitronList.page == page_num %}
+        		<a href="{{ url_for('main.mitronSearchResult', keywords=keywords,species=species,organisms=organisms,sources=sources,page=page_num, mitronGroup=mitronGroup) }}" class="btn btn-dark">
+                		{{ page_num }}
+            		</a>
+            	{% else %}
+            	<a href="{{ url_for('main.mitronSearchResult', keywords=keywords,species=species,organisms=organisms,sources=sources,page=page_num,mitronGroup=mitronGroup) }}" class="btn btn-outline-dark">
+                	{{ page_num }}
+            	</a>
+            	{% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+    <a href="{{ url_for('main.mitronSearchResult', keywords=keywords,species=species,organisms=organisms,sources=sources,page=curMitronList.next_num,mitronGroup=mitronGroup) }}"
+       class="btn btn-outline-dark 
+       {% if curMitronList.page == curMitronList.pages %}disabled{% endif %}">
+        &raquo;
+    </a>
+</div>
+
+<p class="text-right mt-3">
+   Showing page {{ curMitronList.page }} of {{ curMitronList.pages }}
+</p>
+
+</div>
+</div>
+</section>
+
+
+
+{% endblock %}

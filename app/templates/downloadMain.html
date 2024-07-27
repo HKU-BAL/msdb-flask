@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+<section class="content-header">
+        <h1>Download</h1>
+        <ol class="breadcrumb">
+                <li><a href={{url_for("main.index")}}><i class="fas fa-home"></i> Home</a></li>
+                <li class="active">download</li>
+        </ol>
+</section>
+<br/>
+<section class="content">
+
+
+<div class="box box-success">
+	<form action={{url_for("main.download_main")}} id="downloadMain" method="post" enctype="multipart/form-data">
+
+                {{ form.hidden_tag() }}
+
+	<div class="card card-secondary">
+		
+		<div class="card-body">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="custom-control custom-checkbox">
+					<input class="custom-control-input" type="checkbox" id="precursorCheckbox" name="precursorCheckbox" checked value="checked">
+					<label for="precursorCheckbox" class="custom-control-label">Precursor</label>
+					</div>
+					
+				</div>
+				<div class="col-sm-3">
+                                        <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="matureCheckbox" name="matureCheckbox" checked value="checked">
+                                        <label for="matureCheckbox" class="custom-control-label">Mature</label>
+                                        </div>
+
+                                </div>
+
+			</div>
+			<br/>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+					<label>Species</label>
+					<select class="form-control" name="species" multiple>
+						<option value="all" selected> All </option>
+						{% for cur_species in species_list %}
+							<option value="{{cur_species}}"> {{cur_species}} </option>
+						{% endfor %}
+						
+
+					</select>
+					</div>
+				</div>
+				<!--
+				 <div class="col-sm-6">
+					<div class="form-group">
+					<label>Paper</label>
+                                        <select multiple name="paper" class="form-control">
+						<option value='all' selected> All </option>
+						{% for cur_paper in paper_list  %}
+                                                	<option value="{{cur_paper}}">{{ cur_paper}}</option>
+						{% endfor %}
+
+
+                                        </select>
+					</div>
+                                </div>
+				-->
+			</div>
+			<br/>
+			<div class="row">
+				<div class="col-sm-3">
+				 {{form.submit(class="btn btn-success btn-flat")}}
+				</div>
+			</div>
+			<br/>
+		</div>
+	</div>
+	</form>
+</div>
+</section>
+{% endblock %}
+

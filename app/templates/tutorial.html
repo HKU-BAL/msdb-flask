@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block app_content %}
+
+<section class="content-header">
+        <h1>Tutorial</h1>
+        <ol class="breadcrumb">
+                <li><a href={{url_for("main.index")}}><i class="fas fa-home"></i> Home</a></li>
+                <li class="active">Tutorial</li>
+        </ol>
+</section>
+<div class="box box-success">
+
+<div class="box-body">
+
+	
+	<h3><strong>1. About MirtronStructDB</strong></h3>
+        <p>Welcome to <strong>MirtronStructDB</strong>, your comprehensive online resource for exploring the fascinating world of mirtrons. Mirtrons, a unique class of microRNAs, have attracted the interest of researchers due to their distinctive biogenesis pathway within the splicing mechanism.</p>
+        <p><strong>MirtronStructDB</strong> stands out as an evolving database that continually updates its dataset with the latest findings in mirtron research. It's designed to serve researchers and students looking to delve into the world of mirtrons and access the most recent and reliable information.</p>
+
+
+	<br/>
+	<h3><strong>2. What's New in MirtronStructDB</strong></h3>
+        <p>In <strong>MirtronStructDB</strong>, we provide you with not only basic information but also predicted RNA structure of mirtrons to enhance your research.</p>
+        <ul>
+            <li><strong>Expanded Data</strong>: We've augmented our dataset with the most recent developments in mirtron research.</li>
+            <li><strong>RNA Structure Images</strong>: We've incorporated RNA structure images predicted by <a href="https://rna.urmc.rochester.edu/RNAstructureWeb/Servers/Predict1/Predict1.html">RNA Structure</a> </li>
+        </ul>
+       <br/>
+
+	
+        <h3><strong>3. How to Use MirtronStructDB</strong></h3>
+        <p>Using <strong>MirtronStructDB</strong> is easy and intuitive:</p>
+        <ol>
+            <li><strong>Browse by Species</strong>: You can explore mirtrons specific to your area of interest by selecting a particular species. This feature allows you to narrow down your search and focus on a specific organism.</li>
+            <li><strong>Search by Paper</strong>: Search for mirtron data based on publications. Input a paper's title, DOI, or keywords to access relevant mirtron information.</li>
+            <li><strong>Search by Gene Symbol or miRBase ID</strong>: If you have specific details about a mirtron, you can search using gene symbols or miRBase IDs to quickly locate the relevant data.</li>
+        </ol> 
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}
