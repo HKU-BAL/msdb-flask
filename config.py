@@ -19,7 +19,7 @@ class Config(object):
     MAIL_PORT = 587
     MAIL_USE_TLS = 1
 
-    MAIL_USERNAME = "mirtronbal@gmail.com"
+    MAIL_USERNAME = os.environ.get("MAIL_USERNAME") or "mirtronbal@gmail.com"
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 
     ADMINS = [os.environ.get('ADMIN_MAIL')]
