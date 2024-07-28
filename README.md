@@ -14,10 +14,47 @@ MirtronStructDB is an online database addressing these gaps by incorporating ove
 
 In this repo, we provide the source code of the implementation of mirtronStructDB based on the flask framework.
 
-## Availability
+## Online availability (recommended)
 
 [MirtronStructDB](http://www.bio8.cs.hku.hk/msdb/) is available through the online web application
 
+
+## Run it locally (not recommended)
+
+### 1. Clone the repo
+```bash
+git clone https://github.com/HKU-BAL/msdb-flask/
+```
+### 2. Create the environment
+  ```bash
+  cd msdb-flask
+  conda env create -f msdb.yml
+  ```
+### 3. Init the database
+
+```bash
+mkdir db
+flask db init
+flask db migrate -m "db init"
+flask db upgrade
+```
+### 4. Congigurations
+
+```bash
+export IMG_DIR=YOUR_MIRTRON_HIGH_RESOLUTION_PATH
+export SECRET_KEY=YOUR_SECRET_KEY
+export MAIL_USERNAME=YOUR_MAIL_ADDR
+export MAIL_PASSWORD=YOUR_MAIL_PSW
+export ADMIN_MAIL=ADMIN_MAIL_ADDR
+```
+
+### 4. Run the app
+```bash
+gunicorn -w 2 -b 0.0.0.0:5555 wsgi:app --daemon
+#change the port as you preferred
+
+```
+And open http://localhost:5555/ to access the application.
 
 ## New data submission
 * If you would like to report new mirtron samples, please [contact admins](http://www.bio8.cs.hku.hk/msdb/contact)
