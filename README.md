@@ -38,7 +38,7 @@ flask db init
 flask db migrate -m "db init"
 flask db upgrade
 ```
-### 4. Congigurations
+### 4. Configurations
 
 ```bash
 export IMG_DIR=YOUR_MIRTRON_HIGH_RESOLUTION_PATH
